@@ -15,11 +15,10 @@ class CountdownTimer {
   start() {
     this.intervalId = setInterval(() => {
       if (
-        // refs.days.textContent === '00' &&
-        // refs.hours.textContent === '00' &&
-        // refs.mins.textContent === '00' &&
-        // refs.secs.textContent === '00'
-        
+        refs.days.textContent === '00' &&
+        refs.hours.textContent === '00' &&
+        refs.mins.textContent === '00' &&
+        refs.secs.textContent === '00'
       ) {
         clearInterval(this.intervalId);
         return;
@@ -30,6 +29,23 @@ class CountdownTimer {
 
       this.onTick(time);
     }, 1000);
+  }
+
+  check() {
+    if (
+      refs.days.textContent === '00' &&
+      refs.hours.textContent === '00' &&
+      refs.mins.textContent === '00' &&
+      refs.secs.textContent === '00'
+    ) {
+      clearInterval(this.intervalId);
+      return;
+    }
+    const currentTime = Date.now();
+    const deltaTime = this.pad(this.targetDate) - currentTime;
+    const time = this.getTimeComponent(deltaTime);
+
+    this.onTick(time);
   }
 
   getTimeComponent(time) {
@@ -53,11 +69,12 @@ const countdownTimer = new CountdownTimer({
   onTick: updateClockface,
 });
 
-countdownTimer.start();
-
 function updateClockface({ days, hours, mins, secs }) {
   refs.days.textContent = days;
   refs.hours.textContent = hours;
   refs.mins.textContent = mins;
   refs.secs.textContent = secs;
 }
+
+countdownTimer.check();
+countdownTimer.start();
