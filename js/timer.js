@@ -15,10 +15,11 @@ class CountdownTimer {
   start() {
     this.intervalId = setInterval(() => {
       if (
-        refs.days.textContent === '00' &&
-        refs.hours.textContent === '00' &&
-        refs.mins.textContent === '00' &&
-        refs.secs.textContent === '00'
+        // refs.days.textContent === '00' &&
+        // refs.hours.textContent === '00' &&
+        // refs.mins.textContent === '00' &&
+        // refs.secs.textContent === '00'
+        
       ) {
         clearInterval(this.intervalId);
         return;
@@ -48,7 +49,7 @@ class CountdownTimer {
 }
 
 const countdownTimer = new CountdownTimer({
-  targetDate: new Date('Jan 1, 2021').getTime(),
+  targetDate: new Date('Jan 7, 2021').getTime(),
   onTick: updateClockface,
 });
 
